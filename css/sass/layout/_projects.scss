@@ -1,0 +1,190 @@
+.project{
+	padding:48px 0!important;
+	h2{
+		@extend .text-center;
+		font-weight: 300;
+		padding-bottom: 12px;
+		i{
+			color: $background-color5;
+			font-weight: bold;
+		}
+	}
+}
+.project-main{
+	@extend .project;
+	background-color: #fff;
+}
+.theme{
+	@include outer-shadow(0, 0, 8px, $color-shadow);
+	@include transition(all, .2s);
+	margin: 24px 0;
+	&:hover{
+		@include outer-shadow(0, 0, 24px, $color-shadow);
+		@include transition(all, .2s);
+	  	.t_inner{
+		  	background-color: rgba(0, 0, 4, 0.7);
+			background: rgba(0, 0, 4, 0.7);
+		  	@include transition(all, .2s);
+	  	}
+	  	.t_btn{
+	  		visibility: visible;
+	  	}
+	}
+}
+.t_container {
+  margin: 0px auto;
+  width: 100%;
+  height: 100%;
+}
+.t_outer {
+  background-size: 100% 100%;
+  display: table;
+  width: 100%;
+  height: 250px;
+  &:hover{
+  }
+}
+.t_inner {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  @include transition(all, .2s);
+}
+.t_centered {
+  position: relative;
+  display: inline-block;
+  width: 50%;
+  padding: 1em;
+  
+}
+.fig-details{
+	background-color: white;
+	padding: 12px 0px 12px 18px;
+	border-top: 1px solid $body-bg;
+	h4{
+		a{
+		text-decoration: none;
+		margin: 0 0 6px 0;
+		color: lighten($font-dark, 15%);	
+		text-decoration: none;
+		font-weight: bold;
+		&:hover,focus{
+			text-decoration: none;
+			color: lighten($font-dark, 25%);
+			}
+		}
+		span{
+			margin-left: 8px;
+		}
+	}
+
+	p{
+		margin: 0;
+		color: darken($font-dark, 15%);	
+		font-size: 15px;
+		font-weight: 300;
+		line-height: 26px;
+	}
+}
+
+.t_btn{
+	visibility: hidden;
+	border: 1px solid $background-color5;
+	border-radius: 2px; 
+	
+	font-size: 14px;
+	font-weight: 400;
+	color: #fff;
+	background-color:rgb(86, 174, 227);
+	padding: 8px 14px;
+	@include outer-shadow(0, 0, 5px, $dark-bg);
+	@include transition(all, 0.1s);
+	&:hover{
+		text-decoration: none;
+		background-color:lighten(rgb(86, 174, 227),10%);
+		color: $body-bg;
+		border-radius: 2px; 
+		border: 1px solid $background-color5;
+		@include transition(all, .1s);
+		@include outer-shadow(0, 0, 15px, $dark-bg);
+	}
+	&:active{
+		border-radius: 2px; 
+		color: $body-bg;
+		background-color: darken($background-color5, 5%);
+		text-decoration: none;
+	}
+	&:focus{
+		border-radius: 2px; 
+		color: $body-bg;
+		background-color: darken($background-color5, 5%);
+		text-decoration: none;
+	}
+
+}
+.t_btn_m{
+	margin: 28px 0;
+	a{
+		font-size: 18px;
+		font-weight: 300;
+	    background-color: rgb(86, 174, 227);
+	    background: rgb(86, 174, 227);
+        color: rgb(255, 255, 255);
+		border: 1px solid $background-color5;
+	    border-color: rgba(125, 199, 250, 0.35);
+		border-radius: 4px;
+		padding: 12px 18px;
+		margin: 32px 0;
+		text-decoration: none;
+		@include transition(background-color, .2s);
+		&:hover{
+			text-decoration: none;
+			background-color: rgb(86, 227, 194);
+			border-color: rgb(86, 227, 194);
+        	color: rgb(255, 255, 255);
+			@include transition(background-color, .2s);
+			border-radius: 4px;
+		}&:active{
+        	color: rgb(255, 255, 255);
+			background-color: lighten(rgb(86, 174, 227), 10%);
+			border-color:lighten(rgb(86, 174, 227), 6%);
+			border-radius: 4px;
+			text-decoration: none;
+		}
+		&:focus{
+			background-color: $background-color5;
+        	color: rgb(255, 255, 255);
+			border-radius: 4px;
+			text-decoration: none;
+		}
+	}
+}
+
+
+//getting project done section
+.gpd{
+	@extend .container;
+	@extend .text-center;
+	padding: 48px 0;
+	color: darken($brand-warning, 15%);
+	div{
+		padding: 44px 0;
+	}
+	h2{
+		padding-bottom: 32px;
+		color: lighten($font-dark, 15%);
+		font-weight: 300;
+	}
+	h3{
+		font-size: 3.7rem;
+		font-weight: 300;
+	}
+	p{
+		font-size: 18px;
+		color: lighten($font-dark, 15%);
+		font-weight: normal;
+	}
+}
+.gpd_b{
+	border-right: 1px solid darken($body-bg, 20%);
+}

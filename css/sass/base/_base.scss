@@ -1,0 +1,45 @@
+//Sass Variables
+
+$body-bg: #F7F7F7;	
+$background-color1 : #606662;
+$background-color2 : #454948;
+$background-color3 : #7C8783;
+$background-color4 : #121315;
+$background-color5 : #36A9E0;
+$background-color6 : #DFF0D8;
+$background-gray   : #E7E7E7;
+$font-white        : #f8f8f8;
+$dark-bg     	   : #333;
+$lighten-red	   : #CE4843;
+
+
+//Sass Mixins
+
+//Border radious
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+       -o-border-radius: $radius;
+          border-radius: $radius;
+}
+
+
+//Transition
+@mixin transition($property: color, $duration: .3s) {
+  -webkit-transition: $property $duration ease-out;
+  	 -moz-transition: $property $duration ease-out;
+  	  -ms-transition: $property $duration ease-out;
+       -o-transition: $property $duration ease-out;
+          transition: $property $duration ease-out;
+}
+
+//Blur Filter
+
+@mixin blur-filter($val:5px){
+	-webkit-filter: blur($val);
+	   -moz-filter: blur($val);
+	 	 -o-filter: blur($val);
+		-ms-filter: blur($val);
+    		filter: blur($val);
+}

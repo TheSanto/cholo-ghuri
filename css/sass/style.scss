@@ -1,0 +1,40 @@
+/**
+ * ----------------------------------------------------------------------------------------
+ * style.scss
+ *
+ * Author: Jamal Uddin
+ ----------------------------------------------------------------------------------------
+ */
+
+/* Utilities */
+@import "utilities/reset";
+@import "utilities/settings";
+@import "utilities/utilities";
+
+/* Bootstrap */
+@import "bootstrap";
+
+/* Base */
+@import "base/normalize";
+@import "base/base";
+@import "base/ie8";
+
+/* Fonts */
+@import url(https://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic&subset=latin,latin-ext);
+
+
+/* Layout */
+@import "layout/nav";
+@import "layout/header";
+@import "layout/main";
+@import "layout/footer"; 
+@import "layout/contact";
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,35 @@
+/**
+ * ----------------------------------------------------------------------------------------
+ * Main styles.
+ * ----------------------------------------------------------------------------------------
+ */
+ #cg_body{
+ 	background-color: #fff!important;
+ } 
+
+
+ /*----------  Place classes  ----------*/
+ .places{
+ 	h3{
+ 		padding-bottom: 24px;
+ 	}
+ }
+ .place{
+ 	padding: 12px;
+ 	background-color: #fff;
+ 	border: 1px solid #666;
+ 	margin-right: 12px;
+ 	@include transition();
+ 	border-radius: 0!important;
+ 	&:hover{
+ 		background-color: lighten(#777, 50%);
+ 		color: #fff;
+ 		@include transition();
+ 	}
+ 	a{
+ 		color: #777;
+ 		text-decoration: none;
+
+ 	}
+ }
+ 
