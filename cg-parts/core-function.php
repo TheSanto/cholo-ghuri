@@ -1,6 +1,6 @@
 <?php
 function dbExist($dbName){
-      $conn = mysqli_connect('localhost', 'root', 'toor');
+      $conn = mysqli_connect(HOST, USER, PWD);
       $cgQuery = mysqli_select_db($conn, 'cg_db');
       if($cgQuery){
             return true;
@@ -13,9 +13,9 @@ function dbExist($dbName){
 // Create database
 function createDb($dbName=cg){
       $sql = "CREATE DATABASE ".$dbName;
-      $conn = mysqli_connect('localhost', 'root', 'toor');
+      $conn = mysqli_connect(HOST, USER, PWD);
       if ($conn->query($sql) === TRUE) {
-            echo "Database created successfully";
+            //echo "Database created successfully";
       } else {
             echo "Error creating database: " . $conn->error;
       }
@@ -28,19 +28,34 @@ function createDb($dbName=cg){
 function createTable($dbName, $tblName){
       $cgDB = $dbName;
       $tableName = $tblName;
-      $conn = mysqli_connect("localhost", "root", "toor", $cgDB);
+      $conn = mysqli_connect(HOST, USER, PWD, CGBD);
 
       // Check connection
       if($conn === false){
             die("ERROR: Could not connect. " . mysqli_connect_error());
       }
-      // Attempt create table query execution
-      $cgquery = "CREATE TABLE $tableName(
-      id INT(4) NOT NULL PRIMARY KEY AUTO_INCREMENT, 
-      $tableName CHAR(30) NOT NULL)";
+      if($tableName == 'categories'){
+            $cgquery = "CREATE TABLE $tableName(
+            id INT(4) NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+            $tableName CHAR(30),
+            parent CHAR(30),
+            other CHAR(30))";
+      }
+      elseif($tableName == 'spots'){
+            $cgquery = "CREATE TABLE $tableName(
+            id INT(4) NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+            $tableName CHAR(30),
+            sibling CHAR(30),
+            other CHAR(30))";
+      }else{
+            $cgquery = "CREATE TABLE $tableName(
+            id INT(4) NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+            $tableName CHAR(30),
+            other CHAR(30))";
+      }
 
       if (mysqli_query($conn, $cgquery)){
-            //echo "Table persons created successfully";
+            //echo "Table created successfully";
       } else {
             echo "ERROR: Could not able to execute $cgquery. " . mysqli_error($conn);
       }
@@ -49,7 +64,7 @@ function createTable($dbName, $tblName){
 
 //Function to check if table exist
 function isTableExist($tableName){
-      $conn = mysqli_connect('localhost', 'root', 'toor','cg_db');
+      $conn = mysqli_connect(HOST, USER, PWD,'cg_db');
       $query = "SELECT * FROM $tableName";
       if(mysqli_query($conn, $query)) {
             return false;

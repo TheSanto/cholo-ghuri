@@ -5873,4 +5873,7 @@ button.close {
     color: #777;
     text-decoration: none; }
 
+.dash_places .container {
+  margin: 24px auto; }
+
 /*# sourceMappingURL=styles.css.map */

@@ -25,7 +25,7 @@ require('header.php');
           <button type="submit" class="btn btn-default">Submit</button>
         </form>
         <ul class="nav navbar-nav pull-right">
-          <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
+          <li class="active"><a href="/">Home <span class="sr-only">(current)</span></a></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Populer Places <span class="caret"></span></a>
             <ul class="dropdown-menu">
@@ -60,23 +60,25 @@ require('header.php');
     <div class="container">
       <h3>Please select a Place:</h3>
       <?php 
-      if(!dbExist('cg_db')){
-        createDb('cg_db');
+      $conn = mysqli_connect(HOST, USER, PWD, CGBD);
+      $query =  "SELECT * FROM places";
+      $result = mysqli_query($conn, $query);
+      if (mysqli_num_rows($result) > 0) {
+    // output data of each row
+        while($row = mysqli_fetch_assoc($result)) {
+          echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
+        }
+      } else {
+        echo "0 results";
       }
-      else{
-//get the 'browse place' table query
 
-      }
+      mysqli_close($conn);
+      var_dump($result);
       ?>
       <div class="btn btn-success place col-md-3 text-center">
         <a href="#">Cox's Bazar</a>
       </div>
-      <div class="btn btn-success place col-md-3 text-center">
-        <a href="#">Khagrachori</a>
-      </div>
-      <div class="btn btn-success place col-md-3 text-center">
-        <a href="#">Kuakata</a>
-      </div>
+
     </div>
 
   </div>

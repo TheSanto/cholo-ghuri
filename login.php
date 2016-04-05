@@ -1,6 +1,5 @@
 <?php 
-require('cg-parts/user.php');
-require('cg-parts/core-function.php');
+require('function.php');
 require('header.php');
 ?>
 <nav class="navbar navbar-default">
@@ -26,7 +25,7 @@ require('header.php');
 					<button type="submit" class="btn btn-default">Submit</button>
 				</form>
 				<ul class="nav navbar-nav pull-right">
-					<li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
+					<li class="active"><a href="/">Home <span class="sr-only">(current)</span></a></li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Populer Places <span class="caret"></span></a>
 						<ul class="dropdown-menu">
@@ -50,11 +49,15 @@ require('header.php');
 $userName = "";
 $passWord = "";
 $usrValidity = false;
+session_unset(); 
 if (isset($_POST['submit'])){
 	$userName = $_POST['user'];
 	$passWord = $_POST['pwd'];
 	if(verifyUser($userName, $passWord)){
 		$usrValidity = true;
+		session_start();
+		// destroy the session 
+		$_SESSION['name'] = $_POST['user'];
 		header('Location: /dashboard.php');
 	}else echo '<div class="container alert alert-danger" role="alert">Authentication failed. Try again.</div>'; 
 }

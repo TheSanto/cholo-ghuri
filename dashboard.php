@@ -1,7 +1,13 @@
 <?php 
-require('cg-parts/user.php');
-require('cg-parts/core-function.php');
+require('function.php');
 require('header.php');
+session_start();
+if($_SESSION['name']){
+
+}else{
+	echo "Please log in.";
+	die();
+}
 ?>
 <nav class="navbar navbar-inverse">
 	<div class="container-fluid">
@@ -41,7 +47,7 @@ require('header.php');
 					</li>
 					<li><a href="#">Resources</a></li>
 					<li><a href="#">Who we are?</a></li>
-					<li><a href="/">Sign Out</a></li>
+					<li><a href="/login.php">Sign Out</a></li>
 
 				</ul>
 			</div><!-- /.navbar-collapse -->
@@ -51,90 +57,55 @@ require('header.php');
 
 <?php 
 //For submit_places
-if(isset($_POST['submit_places'])){
+if(isset($_POST['submit_new'])){
 	$places = $_POST['places'];
-	if(istableExist($places)){
-		//Insert into table
-
-		// Create connection
-		$conn = mysqli_connect("localhost", "root", "toor", $cgDB="cg_db");
-		// Check connection
-		if (!$conn) {
-			die("Connection failed: " . mysqli_connect_error());
-		}
-
-		$sql = "INSERT INTO places (places)
-		VALUES ('$places')";
-
-		if (mysqli_query($conn, $sql)) {
-			echo '<div class="container alert alert-success" role="alert">Place successfully inserted.</div>';
-		} else {
-			echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-		}
-
-		mysqli_close($conn);
-
-
-	}else{
-		echo '<div class="container alert alert-danger" role="alert">Place Already Exist.</div>';
-	}
-}
-//For submit_cat
-if(isset($_POST['submit_cat'])){
 	$category = $_POST['category'];
-	if(istableExist($category)){
-
-		// Create connection
-		$conn = mysqli_connect("localhost", "root", "toor", $cgDB="cg_db");
-		// Check connection
-		if (!$conn) {
-			die("Connection failed: " . mysqli_connect_error());
-		}
-
-		//Insert into table
-		$sql = "INSERT INTO categories (categories) VALUES ('$category')";
-
-		if (mysqli_query($conn, $sql)) {
-			echo '<div class="container alert alert-success" role="alert">Category successfully inserted.</div>';
-		} else {
-			echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-		}
-
-		mysqli_close($conn);
-
-
-	}else{
-		echo '<div class="container alert alert-danger" role="alert">Place Already Exist.</div>';
-	}
-}
-
-//For submit_spot
-if(isset($_POST['submit_spot'])){
 	$spot = $_POST['spot'];
-	if(istableExist($spot)){
-		//Insert into table
+
+	// if(istableExist('places')){
+		//Insert into column
 
 		// Create connection
-		$conn = mysqli_connect("localhost", "root", "toor", $cgDB="cg_db");
+	$conn = mysqli_connect("localhost", "root", "toor", $cgDB="cg_db");
 		// Check connection
-		if (!$conn) {
-			die("Connection failed: " . mysqli_connect_error());
-		}
-
-		$sql = "INSERT INTO spots (spots) VALUES ('$spot')";
-
-		if (mysqli_query($conn, $sql)) {
-			echo '<div class="container alert alert-success" role="alert">Spot successfully inserted.</div>';
-		} else {
-			echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-		}
-
-		mysqli_close($conn);
-
-
-	}else{
-		echo '<div class="container alert alert-danger" role="alert">Place Already Exist.</div>';
+	if (!$conn) {
+		die("Connection failed: " . mysqli_connect_error());
 	}
+		//insert for places
+	$sql = "INSERT INTO places (places)
+	VALUES ('$places')";
+
+	if (mysqli_query($conn, $sql)) {
+		echo '<div class="container alert alert-success" role="alert">Place successfully inserted.</div>';
+	} else {
+		echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+	}
+		//insert for categories
+	$sql = "INSERT INTO categories (categories, parent)
+	VALUES ('$category', '$places')";
+
+	if (mysqli_query($conn, $sql)) {
+		echo '<div class="container alert alert-success" role="alert">Place successfully inserted.</div>';
+	} else {
+		echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+	}
+		//insert for spots
+	$sql = "INSERT INTO spots (spots, sibling)
+	VALUES ('$spot', '$category')";
+
+	if (mysqli_query($conn, $sql)) {
+		echo '<div class="container alert alert-success" role="alert">Place successfully inserted.</div>';
+	} else {
+		echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+	}
+
+	mysqli_close($conn);
+
+
+	// }
+	// else{
+	// 	echo '<div class="container alert alert-danger" role="alert">Faild.</div>';
+	// }
 }
 ?>
 <form action="dashboard.php" method="POST">
@@ -143,49 +114,57 @@ if(isset($_POST['submit_spot'])){
 			<h1>Welcome, Admin.</h1>
 			<p>Create or modify tables.</p>
 			<hr>
-		</div>
-		<div class="container">
+			<div class="col-sm-8">
+				<div class="container">
+					<div class="dash_place">
+						<div class="col-sm-3">
+							<label for="places">Create new place: </label>
+						</div>
+						<div class="col-sm-4" id="places">
+							<input type="text" name="places" id="places" class="form-control" placeholder="Place name.">
+						</div>
+					</div>
 
-			<div class="dash_place">
-				<div class="col-sm-3">
-					<label for="places">Create new place: </label>
+
 				</div>
-				<div class="col-sm-4" id="places">
-					<input type="text" name="places" id="places" class="form-control" placeholder="Place name.">
+				<div class="container">
+					<div class="dash_place">
+						<div class="col-sm-3">
+							<label for="category">Create new Category: </label>
+						</div>
+						<div class="col-sm-4" id="category">
+							<input type="text" name="category" id="category" class="form-control" placeholder="Category name.">
+						</div>
+					</div>
 				</div>
+				<div class="container">
+					<div class="dash_place">
+						<div class="col-sm-3">
+							<label for="spot">Create new spot: </label>
+						</div>
+						<div class="col-sm-4" id="spot">
+							<input type="text" name="spot" id="spot" class="form-control" placeholder="Spot name.">
+						</div>
+					</div>
+				</div>
+				<div class="container">
+					<div class="col-sm-7 text-right">
+						<input type="submit" value="Create" name="submit_new" class="btn btn-warning">
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
 				<div class="col-sm-5">
-					<input type="submit" value="Create" name="submit_places" class="btn btn-warning">
+					<h3>Places</h3>
+					<ul>
+						<li>Dhaka</li>
+						<li>Chittaging</li>
+						<li>Barishal</li>
+					</ul>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="container">
-		<div class="dash_place">
-			<div class="col-sm-3">
-				<label for="category">Create new Category: </label>
-			</div>
-			<div class="col-sm-4" id="category">
-				<input type="text" name="category" id="category" class="form-control" placeholder="Category name.">
-			</div>
-			<div class="col-sm-5">
-				<input type="submit" value="Create" name="submit_cat" class="btn btn-warning">
-			</div>
-		</div>
-	</div>
-	<div class="container">
-		<div class="dash_place">
-			<div class="col-sm-3">
-				<label for="spot">Create new spot: </label>
-			</div>
-			<div class="col-sm-4" id="spot">
-				<input type="text" name="spot" id="spot" class="form-control" placeholder="Spot name.">
-			</div>
-			<div class="col-sm-5">
-				<input type="submit" value="Create" name="submit_spot" class="btn btn-warning">
-			</div>
-		</div>
-	</div>
-
 </form>
 </body>
 </html>
