@@ -61,19 +61,7 @@ require('header.php');
       <h3>Please select a Place:</h3>
       <?php 
       $conn = mysqli_connect(HOST, USER, PWD, CGBD);
-      $query =  "SELECT * FROM places";
-      $result = mysqli_query($conn, $query);
-      if (mysqli_num_rows($result) > 0) {
-    // output data of each row
-        while($row = mysqli_fetch_assoc($result)) {
-          echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
-        }
-      } else {
-        echo "0 results";
-      }
-
       mysqli_close($conn);
-      var_dump($result);
       ?>
       <div class="btn btn-success place col-md-3 text-center">
         <a href="#">Cox's Bazar</a>
